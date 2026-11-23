@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050616">
+<title>Küçük bir soru 🤔</title>
+<style>
+@property --h{syntax:'<number>';inherits:true;initial-value:280}
+:root{--g:#b44dff}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:#050616}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:#f3e8ff;text-align:center;background:radial-gradient(ellipse at 50% 20%,#14103a,#050616 70%)}
+.aura{position:fixed;inset:0;overflow:hidden;transition:--h 1.8s}
+.aura i{position:absolute;width:90vmax;height:90vmax;border-radius:50%;background:radial-gradient(circle,hsl(var(--h) 90% 52%/.38),transparent 62%);animation:dr 16s ease-in-out infinite alternate}
+.aura i:nth-child(1){left:-40vmax;top:-45vmax}
+.aura i:nth-child(2){right:-45vmax;bottom:-45vmax;animation-delay:-6s;background:radial-gradient(circle,hsl(calc(var(--h) + 50) 90% 50%/.32),transparent 62%)}
+.aura i:nth-child(3){left:10vmax;top:30vh;width:60vmax;height:60vmax;animation-duration:22s;opacity:.6}
+@keyframes dr{to{transform:translate(12vmax,8vmax) scale(1.2)}}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.scene{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top)) 20px max(20px,env(safe-area-inset-bottom));opacity:0;visibility:hidden;transform:scale(.96);transition:opacity .7s,transform .7s,visibility 0s .7s}
+.scene.on{opacity:1;visibility:visible;transform:none;transition-delay:.3s,.3s,0s}
+h1,h2{font-weight:800;line-height:1.25;color:#fff;letter-spacing:.03em;text-shadow:0 0 10px var(--g),0 0 30px var(--g)}
+h1{font-size:clamp(30px,9.2vw,58px);text-transform:none}
+h2{font-size:clamp(30px,8.6vw,54px)}
+p.sub{font-size:clamp(22px,6.4vw,32px);color:#ecd9ff;margin-top:18px;text-shadow:0 0 12px var(--g)}
+.red{--g:#ff2a5f}
+.w{display:inline-block;white-space:nowrap}
+.c{display:inline-block;opacity:0;transform:translateY(.5em) scale(.85)}
+.go .c{animation:ci .9s cubic-bezier(.2,.9,.3,1.25) forwards;animation-delay:calc(var(--i)*40ms + var(--d,0s))}
+.go.out .c{animation:co .5s ease forwards;animation-delay:calc(var(--i)*12ms)}
+@keyframes ci{to{opacity:1;transform:none}}
+@keyframes co{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-.5em)}}
+.glow{}
+.late{opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .9s,transform .9s}
+.late.show{opacity:1;transform:none;pointer-events:auto}
+.btn{position:relative;overflow:hidden;margin-top:clamp(18px,4vh,36px);padding:16px 44px;border-radius:999px;border:1.5px solid rgba(235,180,255,.85);background:linear-gradient(135deg,rgba(168,77,255,.6),rgba(255,79,180,.5));color:#fff;font-weight:600;font-size:clamp(19px,5.2vw,23px);font-family:inherit;cursor:pointer;box-shadow:0 0 18px rgba(176,82,255,.75),0 0 54px rgba(176,82,255,.4),inset 0 0 16px rgba(255,255,255,.2);animation:bp 2.4s ease-in-out infinite;text-shadow:0 0 10px rgba(255,255,255,.7)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-130%);animation:sh 3.4s infinite}
+.btn:active{transform:scale(.93)}
+.btn.small{font-size:17px;padding:11px 28px;margin-top:26px;opacity:.85}
+@keyframes bp{50%{box-shadow:0 0 28px rgba(220,110,255,.95),0 0 80px rgba(220,110,255,.5),inset 0 0 18px rgba(255,255,255,.28)}}
+@keyframes sh{40%,100%{transform:translateX(130%)}}
+.hw{position:relative;display:flex;justify-content:center;margin-top:6px}
+.hw::before{content:"";position:absolute;inset:8% 4%;border-radius:50%;background:radial-gradient(circle,rgba(255,40,90,.35),transparent 65%);animation:hb 1.05s ease-in-out infinite}
+@keyframes hb{50%{transform:scale(1.16);opacity:.65}}
+canvas.cv{position:relative;display:block}
+#hc{width:min(92vw,460px);height:min(50vh,430px)}
+#fc{width:min(90vw,380px);height:min(50vh,420px)}
+.mw{min-height:46vh;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:640px}
+.dots{display:flex;gap:10px;margin-bottom:34px}
+.dots b{width:9px;height:9px;border-radius:50%;background:#ffffff30;transition:.5s}
+.dots b.a{background:#fff;box-shadow:0 0 12px #fff,0 0 24px var(--g);transform:scale(1.4)}
+.big{font-size:clamp(34px,10vw,64px)}
+.fin{font-size:clamp(36px,11vw,72px)}
+.bar{width:min(80vw,380px);height:14px;border-radius:99px;border:1px solid #ffffff40;overflow:hidden;margin:24px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#a84dff,#ff4fb4);box-shadow:0 0 14px #c77dff}.bar i.run{animation:fill 5s ease-in-out forwards}@keyframes fill{to{width:100%}}.ln{font-size:clamp(18px,5vw,24px);margin:7px 0;color:#ecd9ff}.row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+@media(max-height:560px){.dots{margin-bottom:12px}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="aura" id="aura"><i></i><i></i><i></i></div>
+<canvas id="fx"></canvas>
+
+<section class="scene on" id="intro">
+  <h1 class="sp glow" data-t="KÜÇÜK BİR SORUM VAR... 🤔" data-d=".3"></h1>
+  <p class="sub sp" data-t="Çok ciddi. Çok önemli. 😌" data-d="1.6"></p>
+  <button class="btn late" data-d="2800" data-n="msg">Devam et ✨</button>
+</section>
+
+<section class="scene" id="msg">
+  <div class="mw"><div class="dots" id="dots"></div><h2 class="big glow" id="mt"></h2></div>
+  <button class="btn late" data-d="1500" id="nx">Devam et ✨</button>
+</section>
+
+<section class="scene" id="scan">
+  <h2 class="sp glow" data-t="Aramız kontrol ediliyor... 🔍" data-d=".2" style="font-size:clamp(26px,7.5vw,44px)"></h2>
+  <div class="bar"><i></i></div>
+  <div class="ln late" data-d="1000">Arkadaşlık seviyesi: %100 ✅</div>
+  <div class="ln late" data-d="2200">Soğan stoku: yeterli 🧅</div>
+  <div class="ln late" data-d="3400">Garip hava: bulunamadı 🕵️</div>
+  <button class="btn late" data-d="4800" data-n="ask">Sonucu gör ✨</button>
+</section>
+
+<section class="scene" id="ask">
+  <h1 class="sp glow" data-t="Aramız hâlâ iyi mi? 🤔" data-d=".3"></h1>
+  <div class="row late" data-d="1800">
+    <button class="btn" data-n="yes">Evet, iyiyiz 😎</button>
+    <button class="btn" data-n="wait">Düşünüyorum 🌙</button>
+  </div>
+</section>
+
+<section class="scene" id="yes">
+  <h1 class="sp fin glow" data-t="Harika! Aramız tıkır tıkır 🎉" data-d=".3"></h1>
+  <p class="sub sp" style="line-height:1.6" data-t="Her şey yolunda,|soğanlar yerinde. 🧅😂" data-d="1.8"></p>
+  <button class="btn small late" data-d="4500" data-n="intro">Baştan izle ↻</button>
+</section>
+
+<section class="scene" id="wait">
+  <h1 class="sp glow" data-t="Tamam, acele yok. 🌙" data-d=".3"></h1>
+  <p class="sub sp" style="line-height:1.6" data-t="Ben buradayım,|bu arada soğanları soydun mu? 🧅" data-d="1.5"></p>
+  <button class="btn late" data-d="3000" data-n="ask">Geri dön ✨</button>
+</section>
+
+<script>
+const $=s=>document.querySelector(s),R=Math.random,PI2=Math.PI*2,DP=()=>Math.min(devicePixelRatio||1,2);
+const E={o:t=>1-Math.pow(1-t,3),b:t=>1+2.70158*Math.pow(t-1,3)+1.70158*Math.pow(t-1,2),c:t=>Math.max(0,Math.min(1,t))};
+const seg=(T,a,b)=>E.c((T-a)/(b-a));
+
+/* ---------- harf harf yazı animasyonu ---------- */
+function chars(s){const o=[];for(const ch of s){if(ch==='\uFE0F'&&o.length)o[o.length-1]+=ch;else o.push(ch)}return o}
+function split(el,txt){el.textContent='';let i=0;txt.split('|').forEach((ln,li)=>{if(li)el.appendChild(document.createElement('br'));ln.split(' ').forEach((wd,wi)=>{if(wi)el.appendChild(document.createTextNode(' '));const w=document.createElement('span');w.className='w';chars(wd).forEach(ch=>{const c=document.createElement('span');c.className='c';c.style.setProperty('--i',i++);c.textContent=ch;w.appendChild(c)});el.appendChild(w)})})}
+function playText(el){el.classList.remove('go','out');void el.offsetWidth;el.classList.add('go')}
+document.querySelectorAll('.sp').forEach(e=>{split(e,e.dataset.t);e.style.setProperty('--d',(e.dataset.d||0)+'s')});
+
+/* ---------- parıltı sprite ---------- */
+const SP={};
+function spr(c){return SP[c]||(SP[c]=(()=>{const k=document.createElement('canvas');k.width=k.height=64;const x=k.getContext('2d'),g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'#fff');g.addColorStop(.22,c);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return k})())}
+function fit(c){const d=DP(),w=c.clientWidth,h=c.clientHeight;if(!w)return;c.width=w*d;c.height=h*d;c.w=w;c.h=h;c.getContext('2d').setTransform(d,0,0,d,0,0)}
+
+/* ---------- genel efekt katmanı: toz, kıvılcım, konfeti ---------- */
+const X=$('#fx'),xc=X.getContext('2d');let W=0,H=0,P=[],CF=[],endOn=0;
+const DUST=Array.from({length:70},()=>({x:R(),y:R(),s:.15+R()*.5,z:3+R()*9,p:R()*9,c:['#b44dff','#ff5fc8','#6f7bff','#ffffff'][(R()*4)|0]}));
+function rs(){const d=DP();W=innerWidth;H=innerHeight;X.width=W*d;X.height=H*d;xc.setTransform(d,0,0,d,0,0);}
+const COLS=['#c77dff','#ff5fa2','#7df9ff','#ffd166','#ffffff','#9d7bff'];
+function burst(x,y,n,cols=COLS){for(let i=0;i<n;i++){const a=R()*PI2,v=1+R()*5;P.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1,l:1,dl:.012+R()*.018,s:7+R()*14,c:cols[(R()*cols.length)|0],g:.05})}}
+function spark(x,y){P.push({x,y,vx:(R()-.5)*.8,vy:-.3-R()*.8,l:1,dl:.02+R()*.02,s:6+R()*10,c:R()<.5?'#ff3d6e':'#ffb3c7',g:0})}
+function cannon(){for(let k=0;k<2;k++)for(let i=0;i<70;i++){const a=-Math.PI/2+(k?-1:1)*(.15+R()*.6),v=11+R()*12;CF.push(cf(k?W:0,H+10,Math.cos(a)*v,Math.sin(a)*v))}}
+function cf(x,y,vx,vy){return{x,y,vx,vy,r:R()*6,vr:(R()-.5)*.3,w:7+R()*8,h:5+R()*7,c:COLS[(R()*COLS.length)|0],sh:(R()*3)|0,p:R()*9}}
+function star(c,x,y,r,rot){c.beginPath();for(let i=0;i<8;i++){const a=rot+i*Math.PI/4,rr=i%2?r*.38:r;c.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}c.closePath();c.fill()}
+function fxFrame(dt,t){xc.clearRect(0,0,W,H);xc.globalCompositeOperation='lighter';
+ for(const d of DUST){d.y-=d.s*dt/900*1.2;if(d.y<-.05){d.y=1.05;d.x=R()}const a=.25+.35*Math.sin(t*1.5+d.p);xc.globalAlpha=a;xc.drawImage(spr(d.c),d.x*W+Math.sin(t*.4+d.p)*12-d.z,d.y*H-d.z,d.z*2,d.z*2)}
+ for(let i=P.length-1;i>=0;i--){const p=P[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=p.g*dt;p.vx*=.985;p.l-=p.dl*dt;if(p.l<=0){P.splice(i,1);continue}xc.globalAlpha=p.l;const s=p.s*(.5+p.l*.6);xc.drawImage(spr(p.c),p.x-s,p.y-s,s*2,s*2)}
+ xc.globalAlpha=1;xc.globalCompositeOperation='source-over';
+ if(endOn&&CF.length<150&&R()<.45*dt)CF.push(cf(R()*W,-12,(R()-.5)*2,1.5+R()*2.5));
+ for(let i=CF.length-1;i>=0;i--){const f=CF[i];f.x+=f.vx*dt+Math.sin(t*2+f.p)*.6;f.y+=f.vy*dt;f.vy=Math.min(f.vy+.18*dt,3.2);f.vx*=.985;f.r+=f.vr*dt;if(f.y>H+30){CF.splice(i,1);continue}
+  xc.fillStyle=f.c;xc.save();xc.translate(f.x,f.y);xc.rotate(f.r);
+  if(f.sh==0)xc.fillRect(-f.w/2,-f.h/2,f.w,f.h*Math.abs(Math.cos(f.r*2)+.2));else if(f.sh==1){xc.beginPath();xc.arc(0,0,f.h/2,0,PI2);xc.fill()}else{xc.shadowColor=f.c;xc.shadowBlur=10;star(xc,0,0,f.w,0)}
+  xc.restore()}}
+
+
+/* ---------- sahneler ---------- */
+const hue={intro:280,msg:285,scan:200,ask:300,yes:320,wait:240};let cur='intro',tm=[];
+function go(id){const old=document.getElementById(cur),nw=document.getElementById(id);tm.forEach(clearTimeout);tm=[];old.classList.remove('on');cur=id;endOn=0;nw.classList.add('on');$('#aura').style.setProperty('--h',hue[id]);
+ setTimeout(()=>{rs();
+  nw.querySelectorAll('.sp').forEach(e=>playText(e));
+  nw.querySelectorAll('.late').forEach(b=>{b.classList.remove('show');tm.push(setTimeout(()=>b.classList.add('show'),+b.dataset.d))});
+  if(id=='msg'){mi=0;showMsg(true)}
+  if(id=='scan'){const b=nw.querySelector('.bar i');b.classList.remove('run');void b.offsetWidth;b.classList.add('run')}
+  if(id=='yes'){endOn=1;cannon();tm.push(setTimeout(()=>burst(W/2,H*.3,40),900),setTimeout(()=>burst(W*.25,H*.4,30),1700),setTimeout(()=>burst(W*.75,H*.4,30),2300))}
+ },450)}
+document.querySelectorAll('[data-n]').forEach(b=>b.addEventListener('click',()=>{const r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,26);go(b.dataset.n)}));
+
+/* ---------- mesajlar ---------- */
+const MS=['Önce derin bir nefes al. 🌬️','Konuşmamızdan beri radarlarım çalışıyor. 📡','Aklıma tek bir soru takıldı... 🧐','Sistemi bir kontrol edeyim. 🔍'],HU=[200,290,320,170];let mi=0,busy=0;
+$('#dots').innerHTML=MS.map(()=>'<b></b>').join('');
+function showMsg(first){const t=$('#mt');split(t,MS[mi]);playText(t);$('#aura').style.setProperty('--h',HU[mi]);document.querySelectorAll('#dots b').forEach((d,i)=>d.classList.toggle('a',i==mi));
+ const b=$('#nx');b.classList.remove('show');tm.push(setTimeout(()=>b.classList.add('show'),first?1400:1100));busy=0}
+$('#nx').addEventListener('click',()=>{if(busy)return;busy=1;const r=$('#nx').getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,22);
+ if(mi>=MS.length-1){go('scan');return}
+ $('#mt').classList.add('out');$('#nx').classList.remove('show');setTimeout(()=>{mi++;showMsg()},520)});
+
+/* ---------- döngü ---------- */
+let last=performance.now();
+function loop(now){const dt=Math.min((now-last)/16.7,3);last=now;fxFrame(dt,now/1000);requestAnimationFrame(loop)}
+addEventListener('resize',rs);rs();
+document.querySelectorAll('#intro .sp').forEach(playText);
+{const b=document.querySelector('#intro .late');setTimeout(()=>b.classList.add('show'),+b.dataset.d)}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
